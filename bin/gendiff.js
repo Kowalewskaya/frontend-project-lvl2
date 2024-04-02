@@ -1,4 +1,6 @@
+#!/usr/bin/env node
 import parse from '../src/parser.js';
+import comparison from '../src/comparison.js';
 import { Command } from 'commander';
 const program = new Command();
 
@@ -12,7 +14,7 @@ program
   .action((filePath1, filePath2) => {
     const fileContent1 = parse(filePath1);
     const fileContent2 = parse(filePath2);
-    console.log(fileContent1, fileContent2);
+    console.log(comparison(fileContent1, fileContent2));
   })
 
 program.parse();

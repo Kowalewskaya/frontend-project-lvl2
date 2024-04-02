@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "type": "module",
   "description": "[![Actions Status](https://github.com/Kowalewskaya/frontend-project-lvl2/actions/workflows/hexlet-check.yml/badge.svg)](https://github.com/Kowalewskaya/frontend-project-lvl2/actions)",
+  "bin": {
+    "gendiff": "bin/gendiff.js"
+  },
   "main": "bin/gendiff.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -18,6 +21,7 @@
   },
   "homepage": "https://github.com/Kowalewskaya/frontend-project-lvl2#readme",
   "dependencies": {
-    "commander": "^11.1.0"
+    "commander": "^11.1.0",
+    "lodash": "^4.17.21"
   }
 }
