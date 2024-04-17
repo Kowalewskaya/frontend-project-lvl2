@@ -1,7 +1,8 @@
 #!/usr/bin/env node
+import { Command } from 'commander';
 import parse from '../src/parser.js';
 import comparison from '../src/comparison.js';
-import { Command } from 'commander';
+
 const program = new Command();
 
 program
@@ -15,6 +16,6 @@ program
     const fileContent1 = parse(filePath1);
     const fileContent2 = parse(filePath2);
     console.log(comparison(fileContent1, fileContent2));
-  })
+  });
 
 program.parse();
