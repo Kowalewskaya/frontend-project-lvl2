@@ -1,23 +1,47 @@
 import _ from 'lodash';
 
 const makeComparison = (obj1, obj2) => {
-  const keys = _.sortBy(_.uniq([...Object.keys(obj1), ...Object.keys(obj2)]));
-  let result = '{\n';
-  keys.forEach((key) => {
+  console.log('***',obj1,'***', obj2);
+  const allKeys = _.sortBy(_.uniq([...Object.keys(obj1), ...Object.keys(obj2)])).map((key) => {
+    const value1 = obj1[key];
+    const value2 = obj2[key];
+    if (_.isObject(value1) && _.isObject(value2)) {
+      return {
+        action: 'Nested',
+        key: key,
+        value: makeComparison(value1, value2),
+      };
+    }
     if (key in obj2 && !(key in obj1)) {
-      result += `  + ${key}: ${obj2[key]}\n`;
+      return {
+        action: 'Added',
+        key: key,
+        value: value2,
+      };
     }
-    if (key in obj1 && key in obj2 && obj1[key] !== obj2[key]) {
-      result += `  - ${key}: ${obj1[key]}\n`;
-      result += `  + ${key}: ${obj2[key]}\n`;
+    if (key in obj1 && key in obj2 && value1 !== value2) {
+      return {
+        action: 'Edit',
+        key: key,
+        value: value1,
+        value2: value2,
+      }
     }
-    if (key in obj1 && key in obj2 && obj1[key] === obj2[key]) {
-      result += `    ${key}: ${obj1[key]}\n`;
+    if (key in obj1 && key in obj2 && value1 === value2) {
+      return {
+        action: 'Unchanged',
+        key: key,
+        value: value1,
+      }
     }
     if (key in obj1 && !(key in obj2)) {
-      result += `  - ${key}: ${obj1[key]}\n`;
+      return {
+        action: 'Delete',
+        key: key,
+        value: value1,
+      }
     }
   });
-  return `${result}}`;
+  return allKeys;
 };
 export default makeComparison;
