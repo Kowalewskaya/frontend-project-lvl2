@@ -16,7 +16,6 @@ program
   .action((filePath1, filePath2) => {
     const fileContent1 = parse(filePath1);
     const fileContent2 = parse(filePath2);
-    console.log('___', fileContent2);
     console.log(stylish(makeComparison(fileContent1, fileContent2)));
   });
 
