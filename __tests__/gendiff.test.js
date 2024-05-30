@@ -2,10 +2,10 @@ import { fileURLToPath } from 'url';
 import fs from 'fs';
 import path from 'path';
 import { test, expect } from '@jest/globals';
-import genDiff from '../src/comparison.js';
+import makeComparison from '../src/comparison.js';
 import parse from '../src/parser.js';
 import getStylish from '../src/formatters/stylish.js';
-import makePlain from '../src/formatters/plain.js';
+import getPlain from '../src/formatters/plain.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -18,11 +18,13 @@ test('gendiff', () => {
   const ymlContent1 = parse(getFixturePath('file1.yml'));
   const ymlContent2 = parse(getFixturePath('file2.yml'));
 
-  const jsogDiff = genDiff(jsongContent1, jsongContent2);
-  const ymlDiff = genDiff(ymlContent1, ymlContent2);
+  const jsonDiff = makeComparison(jsongContent1, jsongContent2);
+  const ymlDiff = makeComparison(ymlContent1, ymlContent2);
 
-  expect(getStylish(jsogDiff)).toEqual(readFixture('expected_file.txt'));
+  expect(getStylish(jsonDiff)).toEqual(readFixture('expected_file.txt'));
   expect(getStylish(ymlDiff)).toEqual(readFixture('expected_file.txt'));
-  expect(makePlain(jsogDiff)).toEqual(readFixture('expected_file_plain.txt'));
-  expect(makePlain(ymlDiff)).toEqual(readFixture('expected_file_plain.txt'));
+  expect(getPlain(jsonDiff)).toEqual(readFixture('expected_file_plain.txt'));
+  expect(getPlain(ymlDiff)).toEqual(readFixture('expected_file_plain.txt'));
+  expect(JSON.stringify(jsonDiff)).toEqual(readFixture('expected_file_json.txt'));
+  expect(JSON.stringify(ymlDiff)).toEqual(readFixture('expected_file_json.txt'));
 });

@@ -1,5 +1,5 @@
 import getStylish from './stylish.js';
-import makePlain from './plain.js';
+import getPlain from './plain.js';
 import makeComparison from '../comparison.js';
 
 const index = (data1, data2, format = 'stylish') => {
@@ -8,8 +8,11 @@ const index = (data1, data2, format = 'stylish') => {
     return getStylish(currentData);
   }
   if (format === 'plain') {
-    return makePlain(currentData);
+    return getPlain(currentData);
   }
+	if (format === 'json') {
+		return JSON.stringify(currentData);
+	}
   return null;
 };
 export default index;
