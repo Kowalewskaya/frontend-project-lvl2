@@ -1,17 +1,18 @@
 import _ from 'lodash';
+
 const getPlain = (obj) => {
   const iter = (value) => {
     switch (typeof value) {
       case 'object':
-        return (value == null) ? value : '[complex value]';
-      case 'string': 
+        return (value === null) ? value : '[complex value]';
+      case 'string':
         return `'${value}'`;
       default:
         return `${value}`;
     }
   };
   const getPath = (data) => data.flat().join('.');
-  const result = (obj, path) => obj.map((key) => {
+  const result = (data, path) => data.map((key) => {
     const currentPath = getPath([path, key.key]);
     switch (key.action) {
       case 'Nested':
@@ -25,8 +26,8 @@ const getPlain = (obj) => {
       case 'Unchanged':
         return null;
       default:
-        return ``;
-    };
+        return '';
+    }
   });
   return result(obj, []);
 };

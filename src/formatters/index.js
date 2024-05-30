@@ -1,14 +1,15 @@
-import getStylish from "./stylish";
-import makePlain from "./plain";
-import makeComparison from "../comparison";
+import getStylish from './stylish.js';
+import makePlain from './plain.js';
+import makeComparison from '../comparison.js';
 
-const index = (format = 'stylish', data1, data2) => {
+const index = (data1, data2, format = 'stylish') => {
   const currentData = makeComparison(data1, data2);
-  if (format === 'stylish'){
-		return getStylish(currentData);
+  if (format === 'stylish') {
+    return getStylish(currentData);
   }
- 	 if (format === 'plain'){
-	return makePlain(currentData);
+  if (format === 'plain') {
+    return makePlain(currentData);
   }
+  return null;
 };
 export default index;

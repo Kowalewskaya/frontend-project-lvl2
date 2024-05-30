@@ -5,6 +5,7 @@ import { test, expect } from '@jest/globals';
 import genDiff from '../src/comparison.js';
 import parse from '../src/parser.js';
 import getStylish from '../src/formatters/stylish.js';
+import makePlain from '../src/formatters/plain.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -19,9 +20,9 @@ test('gendiff', () => {
 
   const jsogDiff = genDiff(jsongContent1, jsongContent2);
   const ymlDiff = genDiff(ymlContent1, ymlContent2);
-  const plainDiff = genDiff(jsongContent1, jsongContent2);
 
   expect(getStylish(jsogDiff)).toEqual(readFixture('expected_file.txt'));
   expect(getStylish(ymlDiff)).toEqual(readFixture('expected_file.txt'));
-  expect(getStylish(plainDiff)).toEqual(readFixture('expected_file_plain.txt'));
+  expect(makePlain(jsogDiff)).toEqual(readFixture('expected_file_plain.txt'));
+  expect(makePlain(ymlDiff)).toEqual(readFixture('expected_file_plain.txt'));
 });
