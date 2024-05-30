@@ -1,8 +1,7 @@
 #!/usr/bin/env node
 import { Command } from 'commander';
 import parse from '../src/parser.js';
-import makeComparison from '../src/comparison.js';
-import stylish from '../src/stylish.js';
+import index from '../src/formatters/index.js';
 
 const program = new Command();
 
@@ -16,7 +15,7 @@ program
   .action((filePath1, filePath2) => {
     const fileContent1 = parse(filePath1);
     const fileContent2 = parse(filePath2);
-    console.log(stylish(makeComparison(fileContent1, fileContent2)));
+    console.log(index(program.opts().format, fileContent1, fileContent2));
   });
 
 program.parse();

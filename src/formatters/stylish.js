@@ -1,6 +1,6 @@
 import _ from 'lodash';
 
-const stylish = (obj) => {
+const getStylish = (obj) => {
   const signs = {
     added: '+ ',
     deleted: '- ',
@@ -36,4 +36,4 @@ const stylish = (obj) => {
   };
   return iter(obj);
 };
-export default stylish;
+export default getStylish;
