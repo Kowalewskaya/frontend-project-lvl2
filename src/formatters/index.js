@@ -3,7 +3,7 @@ import getStylish from './stylish.js';
 import getPlain from './plain.js';
 import makeComparison from '../comparison.js';
 
-const index = (data1, data2, format = 'stylish') => {
+const makeFormat = (data1, data2, format = 'stylish') => {
   const fileContent1 = parse(data1);
   const fileContent2 = parse(data2);
   const currentData = makeComparison(fileContent1, fileContent2);
@@ -18,4 +18,4 @@ const index = (data1, data2, format = 'stylish') => {
   }
   return null;
 };
-export default index;
+export default makeFormat;

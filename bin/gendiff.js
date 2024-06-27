@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 import { Command } from 'commander';
-import index from '../src/formatters/index.js';
+import genDiff from '../src/index.js';
 
 const program = new Command();
 
@@ -11,8 +11,8 @@ program
   .option('-f, --format [type]', 'output format', 'stylish')
   .argument('<filepath1>')
   .argument('<filepath2>')
-  .action((data1, data2) => {
-    console.log(index(data1, data2, program.opts().format));
+  .action((filepath1, filepath2) => {
+    console.log(genDiff(filepath1, filepath2, program.opts().format));
   });
 
 program.parse();
