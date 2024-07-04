@@ -1,8 +1,8 @@
+import path from 'path';
+import fs from 'fs';
 import makeFormat from './formatters/index.js';
 import makeComparison from './comparison.js';
 import parse from './parser.js';
-import path from 'path';
-import fs from 'fs';
 
 function readFile(filePath) {
   const dirName = process.cwd(filePath);
